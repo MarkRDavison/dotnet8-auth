@@ -1,0 +1,43 @@
+﻿@page "/"
+@using System.Text.Json
+@using dotnet8.auth.web.Services
+
+@inject NavigationManager _navigationManager;
+@inject IApiService _apiService;
+
+<PageTitle>Home</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+<button disabled="@Authenticated" @onclick="Login">Login</button>
+<button disabled="@NotAuthenticated" @onclick="Test">Do authed actions</button>
+<button disabled="@NotAuthenticated" @onclick="Logout">Logout</button>
+
+<p>@JsonSerializer.Serialize(_user)</p>
+
+@code {
+    private object? _user;
+    private bool Authenticated => _user != null;
+    private bool NotAuthenticated => _user == null;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _user = await _apiService.User(CancellationToken.None);
+    }
+
+    private async Task Test()
+    {
+        await _apiService.TestGet(CancellationToken.None);
+        await _apiService.TestPost(CancellationToken.None);
+    }
+
+    private void Login()
+    {
+        _navigationManager.NavigateTo($"https://localhost:40000/login?returnUrl={Uri.EscapeDataString(_navigationManager.Uri)}", forceLoad: true);
+    }
+    private void Logout()
+    {
+        _navigationManager.NavigateTo("https://localhost:40000/logout");
+    }
+}
