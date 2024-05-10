@@ -25,6 +25,7 @@ public class CheckAccessTokenValidityMiddleware
                 if ((dateExpireAt - DateTime.Now).TotalMinutes < 3)
                 {
                     bool tokenRefreshFailure = true;
+                    // TODO: Cache token endpoint
                     var discoveryResponse = await _client.GetDiscoveryDocumentAsync(_options.Value.AUTHORITY);
                     if (!string.IsNullOrWhiteSpace(discoveryResponse.TokenEndpoint))
                     {
@@ -77,8 +78,6 @@ public class CheckAccessTokenValidityMiddleware
                                 {
                                     info.Properties.StoreTokens(tokens);
                                     await context.SignInAsync("Cookies", info.Principal, info.Properties);
-
-                                    Console.WriteLine("Refreshed access token automatically");
                                     tokenRefreshFailure = false;
                                 }
                             }

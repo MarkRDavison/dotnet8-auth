@@ -25,7 +25,7 @@ public class ApiService : IApiService
         Console.WriteLine(await response.Content.ReadAsStringAsync(cancellationToken));
     }
 
-    public async Task<object?> User(CancellationToken cancellationToken)
+    public async Task<UserInfo?> User(CancellationToken cancellationToken)
     {
         var response = await _httpClient.GetAsync("/auth/user", cancellationToken);
 
@@ -34,6 +34,6 @@ public class ApiService : IApiService
             return null;
         }
 
-        return await response.Content.ReadAsStringAsync(cancellationToken);
+        return await response.Content.ReadFromJsonAsync<UserInfo>(cancellationToken);
     }
 }

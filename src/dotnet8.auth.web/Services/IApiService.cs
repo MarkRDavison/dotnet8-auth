@@ -5,5 +5,5 @@ public interface IApiService
     Task TestGet(CancellationToken cancellationToken);
     Task TestPost(CancellationToken cancellationToken);
 
-    Task<object?> User(CancellationToken cancellationToken);
+    Task<UserInfo?> User(CancellationToken cancellationToken);
 }

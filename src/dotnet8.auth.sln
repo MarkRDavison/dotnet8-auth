@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnet8.auth.web", "dotnet8
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnet8.auth.common.server", "dotnet8.auth.common.server\dotnet8.auth.common.server.csproj", "{04A7BA0B-2A37-4DFD-B013-649410C704B2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnet8.auth.shared", "dotnet8.auth.shared\dotnet8.auth.shared.csproj", "{CECC040A-6EBD-4C6B-A35A-16B92D51F85B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{04A7BA0B-2A37-4DFD-B013-649410C704B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{04A7BA0B-2A37-4DFD-B013-649410C704B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{04A7BA0B-2A37-4DFD-B013-649410C704B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CECC040A-6EBD-4C6B-A35A-16B92D51F85B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CECC040A-6EBD-4C6B-A35A-16B92D51F85B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CECC040A-6EBD-4C6B-A35A-16B92D51F85B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CECC040A-6EBD-4C6B-A35A-16B92D51F85B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

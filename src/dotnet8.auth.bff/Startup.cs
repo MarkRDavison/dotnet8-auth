@@ -1,4 +1,6 @@
-﻿namespace dotnet8.auth.bff;
+﻿using dotnet8.auth.common.server.Authentication;
+
+namespace dotnet8.auth.bff;
 
 public class Startup
 {
@@ -86,9 +88,9 @@ public class Startup
             {
                 _.ExpireTimeSpan = TimeSpan.FromHours(8);
                 _.SlidingExpiration = false;
-                _.Cookie.Name = "__MySPA";
-                // When the value is Strict the cookie will only be sent along with "same-site" requests.
-                _.Cookie.SameSite = SameSiteMode.Strict; // TODO: Prod mode
+                _.Cookie.Name = "__dotnet8auth";
+                _.Cookie.SameSite = SameSiteMode.Strict;
+                _.Cookie.SecurePolicy = CookieSecurePolicy.Always;
                 _.LogoutPath = "/logout-complete";
                 _.LoginPath = "/login";
             });
@@ -184,13 +186,22 @@ public class Startup
                 })
                 .RequireAuthorization();
 
-            endpoints.MapGet("/auth/user", (HttpContext context) =>
+            endpoints.MapGet("/auth/user", (HttpContext context, IOptions<AppSettings> appSettingsOptions) =>
             {
                 if (context.User?.Identity?.IsAuthenticated ?? false)
                 {
-                    var name = context.User.Claims.FirstOrDefault(_ => _.Type == "name")?.Value;
+                    var claimsSettings = new ClaimsSettings()
+                    {
+                        IdType = appSettingsOptions.Value.CLAIM_NAME_ID,
+                        NameType = appSettingsOptions.Value.CLAIM_NAME_NAME,
+                        UsernameType = appSettingsOptions.Value.CLAIM_NAME_USERNAME,
+                        EmailType = appSettingsOptions.Value.CLAIM_NAME_EMAIL
+                    };
 
-                    return Results.Ok(name);
+                    if (context.User.ExtractUserInfo(claimsSettings) is var userInfo)
+                    {
+                        return Results.Ok(userInfo);
+                    }
                 }
 
                 return Results.Unauthorized();
