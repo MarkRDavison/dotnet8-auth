@@ -36,7 +36,7 @@ public class CheckAccessTokenValidityMiddleware
                             Address = discoveryResponse.TokenEndpoint
                         });
 
-                        var refreshToken = await context.GetTokenAsync("refresh_token");
+                        var refreshToken = await context.GetTokenAsync(OpenIdConnectParameterNames.RefreshToken);
 
                         if (!string.IsNullOrEmpty(refreshToken))
                         {
@@ -96,7 +96,7 @@ public class CheckAccessTokenValidityMiddleware
             }
         }
 
-        var accessToken = await context.GetTokenAsync("access_token");
+        var accessToken = await context.GetTokenAsync(OpenIdConnectParameterNames.AccessToken);
 
         context.Request.Headers.Authorization = $"Bearer {accessToken}";
 
