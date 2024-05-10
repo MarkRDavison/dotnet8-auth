@@ -1,10 +1,5 @@
-﻿using IdentityModel.Client;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.IdentityModel.Protocols.OpenIdConnect;
-using System.Globalization;
-using System.Net;
+﻿namespace dotnet8.auth.common.server.Middleware;
 
-namespace dotnet8.auth.common.server.Middleware;
 public class CheckAccessTokenValidityMiddleware
 {
     private readonly RequestDelegate _next;

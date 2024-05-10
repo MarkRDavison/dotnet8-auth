@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Components.WebAssembly.Http;
-
-namespace dotnet8.auth.web;
+﻿namespace dotnet8.auth.web;
 
 public class CookieHandler : DelegatingHandler
 {

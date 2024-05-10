@@ -1,13 +1,4 @@
-﻿using dotnet8.auth.common.server.Middleware;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.OpenIdConnect;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Protocols.OpenIdConnect;
-using System.Diagnostics;
-using System.Net;
-using Yarp.ReverseProxy.Forwarder;
-
-namespace dotnet8.auth.bff;
+﻿namespace dotnet8.auth.bff;
 
 public class Startup
 {

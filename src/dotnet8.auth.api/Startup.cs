@@ -1,8 +1,4 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.JsonWebTokens;
-using Microsoft.IdentityModel.Tokens;
-
-namespace dotnet8.auth.api;
+﻿namespace dotnet8.auth.api;
 
 public class Startup
 {
