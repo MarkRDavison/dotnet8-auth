@@ -98,13 +98,11 @@ public class CheckAccessTokenValidityMiddleware
 
         var accessToken = await context.GetTokenAsync(OpenIdConnectParameterNames.AccessToken);
 
-        if (string.IsNullOrEmpty(accessToken))
+        if (!string.IsNullOrEmpty(accessToken))
         {
-            context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
-            return;
+            context.Request.Headers.Authorization = $"Bearer {accessToken}";
         }
 
-        context.Request.Headers.Authorization = $"Bearer {accessToken}";
 
         await _next.Invoke(context);
     }
